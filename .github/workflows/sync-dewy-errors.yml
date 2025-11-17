@@ -1,4 +1,4 @@
-name: Sync Dewy Errors
+name: Pull Updates from dewy-lang
 
 on:
   schedule:
