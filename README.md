@@ -1,4 +1,7 @@
 # Pretty Err
+
+[![PyPI version](https://img.shields.io/pypi/v/prettyerr.svg)](https://pypi.org/project/prettyerr/)
+
 A simple library for printing modern, source-annotated error messages.
 
 ## Features
