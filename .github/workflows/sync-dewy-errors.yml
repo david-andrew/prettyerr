@@ -76,11 +76,11 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Sync Dewy errors module"
-          title: "Sync Dewy errors module"
+          commit-message: "Pull updates from dewy-lang"
+          title: "Pull updates from dewy-lang"
           body: |
             ## Summary
-            - Replace `prettyerr/__init__.py` with the latest Dewy source
+            - Update `prettyerr/__init__.py` with any changes from dewy-lang/src/cleanparse/errors.py
             - Bump the project minor version with `uv`
             - Run `pytest tests/test_examples.py`
 
