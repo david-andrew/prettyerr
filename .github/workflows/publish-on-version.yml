@@ -5,6 +5,11 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      force_publish:
+        description: Force publish even if version unchanged
+        required: false
+        default: "false"
 
 permissions:
   contents: read
@@ -19,8 +24,15 @@ jobs:
 
       - name: Detect version change
         id: version
+        env:
+          FORCE_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force_publish == 'true' }}
         run: |
           set -euo pipefail
+          if [ "$FORCE_PUBLISH" = "true" ]; then
+            echo "Force publish requested via workflow dispatch."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           before="${{ github.event.before }}"
           if [ "$before" = "0000000000000000000000000000000000000000" ]; then
             before="$(git rev-list --max-parents=0 HEAD | head -n 1)"
