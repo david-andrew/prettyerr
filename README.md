@@ -67,11 +67,11 @@ print(e)
 
 
 ## Tasks
-- [ ] set up slaving to dewy-lang repo error.py
-- [ ] set up workflow to periodically check for changes to error.py (maybe once per week?)
-    - [ ] on change, create a PR using the newest version of the error.py
-    - [ ] run tests to make sure everything is still working
-    - [ ] if tests fail, note that in the PR (e.g. if I move error.py, the script would fail to pull it in, etc.)
-    - [ ] PR should assign me so that I know to deal with it
+- [x] set up slaving to dewy-lang repo error.py
+- [x] set up workflow to periodically check for changes to error.py (maybe once per week?)
+    - [x] on change, create a PR using the newest version of the error.py
+    - [x] run tests to make sure everything is still working
+    - [x] if tests fail, note that in the PR (e.g. if I move error.py, the script would fail to pull it in, etc.)
+    - [x] PR should assign me so that I know to deal with it
     - [ ] TBD if a previous PR hasn't been merged what to do, perhaps just let it make a new PR?
 - [ ] improve README
