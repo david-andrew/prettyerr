@@ -1,3 +1,6 @@
 # autoenv files
 .autoenv
 .autoleave
+
+# python cache
+__pycache__/
