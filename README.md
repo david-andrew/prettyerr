@@ -1,6 +1,12 @@
 # Pretty Err
 A simple library for printing modern, source-annotated error messages.
 
+## Features
+- source span annotation
+- color output
+- multiple non-overlapping spans
+- zero-width spans
+
 ## Install
 ```
 pip install prettyerr
