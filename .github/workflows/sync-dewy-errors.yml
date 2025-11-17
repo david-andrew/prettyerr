@@ -65,7 +65,7 @@ jobs:
           set -o pipefail
           pytest tests/test_examples.py | tee pytest-output.txt
           {
-            echo "report<<'PYTEST'" >> "$GITHUB_OUTPUT"
+            echo "report<<PYTEST" >> "$GITHUB_OUTPUT"
             cat pytest-output.txt >> "$GITHUB_OUTPUT"
             echo "PYTEST" >> "$GITHUB_OUTPUT"
           }
