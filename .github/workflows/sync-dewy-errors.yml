@@ -69,6 +69,7 @@ jobs:
             cat pytest-output.txt >> "$GITHUB_OUTPUT"
             echo "PYTEST" >> "$GITHUB_OUTPUT"
           }
+          rm pytest-output.txt
 
       - name: Create pull request
         if: steps.diff.outputs.changed == 'true'
