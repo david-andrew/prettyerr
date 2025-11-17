@@ -46,6 +46,10 @@ jobs:
         if: steps.diff.outputs.changed == 'true'
         run: python -m pip install --upgrade pip pytest
 
+      - name: Install project
+        if: steps.diff.outputs.changed == 'true'
+        run: pip install -e .
+
       - name: Install uv
         if: steps.diff.outputs.changed == 'true'
         uses: astral-sh/setup-uv@v4
