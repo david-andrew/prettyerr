@@ -56,7 +56,7 @@ jobs:
 
       - name: Bump project version
         if: steps.diff.outputs.changed == 'true'
-        run: uv version --bump minor
+        run: uv version --bump patch
 
       - name: Run tests
         if: steps.diff.outputs.changed == 'true'
@@ -81,7 +81,7 @@ jobs:
           body: |
             ## Summary
             - Update `prettyerr/__init__.py` with any changes from dewy-lang/src/cleanparse/reporting.py
-            - Bump the project minor version with `uv`
+            - Bump the project patch version with `uv`
             - Run `pytest tests/test_examples.py`
 
             ## Test Results
