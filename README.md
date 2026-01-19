@@ -1,6 +1,8 @@
 # Pretty Err
 
 [![PyPI version](https://img.shields.io/pypi/v/prettyerr.svg)](https://pypi.org/project/prettyerr/)
+[![Python versions](https://img.shields.io/pypi/pyversions/prettyerr.svg)](https://pypi.org/project/prettyerr/)
+[![CI](https://github.com/david-andrew/prettyerr/actions/workflows/sync-dewy-error-reporting.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/WORKFLOW_FILE.yml)
 
 A simple library for printing modern, source-annotated error messages.
 
@@ -15,63 +17,60 @@ A simple library for printing modern, source-annotated error messages.
 pip install prettyerr
 ```
 
-## Example
+## Quickstart
+Print out an error report for some example source code
 
-Say you have the following source code that contains an error
 ```python
-def repeat(message: str, times: int) -> str:
-    return message * times
+from prettyerr import Error, Pointer, Span, SrcFile
 
+# example source code
+src = """\
+const repeat = (message:string, times:int) :> string => {
+    return message * times
+}
 result = repeat("hello", "3")
-print(result)
+printl(result)
+"""
+
+# Locate spans to highlight (.index() here is just for simplicity)
+repeat_start = src.index('repeat(')
+bad_arg_start = src.index('"3"')
+times_span = Span(repeat_start, repeat_start + len('repeat'))
+bad_arg_span = Span(bad_arg_start, bad_arg_start + len('"3"'))
+
+# Build and print the error report
+report = Error(
+    SrcFile.from_text(src, "path/to/example.lang"),
+    title="type mismatch for argument `times`",
+    pointer_messages=[
+        Pointer(span=times_span, message="`repeat` function's second argument `times` expects an 'int'"),
+        Pointer(span=bad_arg_span, message="argument given is type 'string'"),
+    ],
+    hint='Consider changing string literal "3" to integer 3',
+)
+print(report)
 ```
 
-A nice error message might look something like this
+This generates the following error report
 ```
 Error: type mismatch for argument `times`
 
-    ╭─[path/to/py_example.py:4:10]
+    ╭─[path/to/example.lang:4:10]
   4 | result = repeat("hello", "3")
     ·          ──┬───          ─┬─
-    ·            │              ╰─ argument given is type 'str'
+    ·            │              ╰─ argument given is type 'string'
     ·            ╰─ `repeat` function's second argument `times` expects an 'int'
     ╰───
   help: Consider changing string literal "3" to integer 3
 ```
 
-To render this error message:
-```python
-from prettyerr import Error, PointerMessage, Span, SrcFile
+## API at a glance
+- `SrcFile.from_text(body, path=None)`
+- `Span(start, stop)` (stop-exclusive)
+- `Pointer(span=Span(...) | list[Span], message=..., placement=None, color=None)`
+- Report types: `Error`, `Warning`, `Info`, `Hint`
+- Common fields: `title`, `message`, `pointer_messages`, `hint`, `use_color`
 
-src = """\
-def repeat(message: str, times: int) -> str:
-    return message * times
-
-result = repeat("hello", "3")
-print(result)
-"""
-
-e = Error(
-    SrcFile(py_src, "path/to/py_example.py"),
-    title="type mismatch for argument `times`",
-    pointer_messages=[
-        PointerMessage(span=Span(82, 88), message="`repeat` function's second argument `times` expects an 'int'"),
-        PointerMessage(span=Span(98, 101), message="argument given is type 'str'"),
-    ],
-    hint='Consider changing string literal "3" to integer 3',
-)
-print(e)
-```
-
-
-
-
-## Tasks
-- [x] set up slaving to dewy-lang repo error.py
-- [x] set up workflow to periodically check for changes to error.py (maybe once per week?)
-    - [x] on change, create a PR using the newest version of the error.py
-    - [x] run tests to make sure everything is still working
-    - [x] if tests fail, note that in the PR (e.g. if I move error.py, the script would fail to pull it in, etc.)
-    - [x] PR should assign me so that I know to deal with it
-    - [ ] TBD if a previous PR hasn't been merged what to do, perhaps just let it make a new PR?
-- [ ] improve README
+## Tips
+- Disable ANSI colors with `use_color=False`.
+- Raise an exception with `Error(...).throw()` (raises `ReportException`).
