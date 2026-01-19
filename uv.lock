@@ -52,7 +52,7 @@ wheels = [
 
 [[package]]
 name = "prettyerr"
-version = "0.0.1rc0"
+version = "0.0.2"
 source = { editable = "." }
 
 [package.dev-dependencies]
