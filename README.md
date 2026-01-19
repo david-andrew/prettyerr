@@ -2,7 +2,7 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/prettyerr.svg)](https://pypi.org/project/prettyerr/)
 [![Python versions](https://img.shields.io/pypi/pyversions/prettyerr.svg)](https://pypi.org/project/prettyerr/)
-[![CI](https://github.com/david-andrew/prettyerr/actions/workflows/sync-dewy-error-reporting.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/WORKFLOW_FILE.yml)
+[![CI](https://github.com/david-andrew/prettyerr/actions/workflows/sync-dewy-error-reporting.yml/badge.svg)](https://github.com/david-andrew/prettyerr/actions/workflows/sync-dewy-error-reporting.yml)
 
 A simple library for printing modern, source-annotated error messages.
 
