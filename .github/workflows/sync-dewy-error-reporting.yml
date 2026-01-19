@@ -20,7 +20,7 @@ jobs:
       - name: Download Dewy source
         run: >
           curl -fsSL
-          https://raw.githubusercontent.com/david-andrew/dewy-lang/refs/heads/master/src/cleanparse/errors.py
+          https://raw.githubusercontent.com/david-andrew/dewy-lang/refs/heads/master/src/cleanparse/reporting.py
           -o prettyerr/__init__.py
 
       - name: Check for differences
@@ -80,7 +80,7 @@ jobs:
           title: "Pull updates from dewy-lang"
           body: |
             ## Summary
-            - Update `prettyerr/__init__.py` with any changes from dewy-lang/src/cleanparse/errors.py
+            - Update `prettyerr/__init__.py` with any changes from dewy-lang/src/cleanparse/reporting.py
             - Bump the project minor version with `uv`
             - Run `pytest tests/test_examples.py`
 
@@ -88,7 +88,7 @@ jobs:
             ```
             ${{ steps.tests.outputs.report }}
             ```
-          branch: chore/sync-dewy-errors
+          branch: chore/sync-dewy-error-reporting
           delete-branch: true
           assignees: david-andrew
 
